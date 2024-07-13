@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle to Square with and without Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .first-circle:hover {
+            border-radius: 0;
+            background-color: darkblue;
+        }
+
+        .second-circle:hover {
+            border-radius: 0;
+            background-color: darkblue;
+            transition: all 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle first-circle"></div>
+    <div class="circle second-circle"></div>
+</body>
+</html>

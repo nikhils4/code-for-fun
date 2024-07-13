@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Button Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        .button {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 80px;
+            background-color: #0a20ad;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            font-size: 18px;
+        }
+
+        .button-content {
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .button-text {
+            transition: all 0.3s ease;
+            opacity: 1;
+        }
+
+        .button-emoji {
+            position: absolute;
+            left: -25px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover .button-content {
+            transform: translateX(20px);
+        }
+
+        .button:hover .button-text {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        .button:hover .button-emoji {
+            left: -10px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <button class="button">
+        <span class="button-content">
+            <span class="button-text">Next</span>
+            <span class="button-emoji">👉</span>
+        </span>
+    </button>
+</body>
+</html>
