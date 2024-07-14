@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteor Animation</title>
+    <style>
+
+        body {
+            background-color: #000;
+            overflow: hidden;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .meteor {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow:
+                    0 0 0 2px rgba(255,255,255,0.1),
+                    0 0 0 4px rgba(255,255,255,0.1),
+                    0 0 10px rgba(255,255,255,1);
+            animation: fall 3s linear infinite;
+        }
+
+        .meteor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 100%);
+            right: 4px;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate(0, -100px) rotate(45deg);
+                opacity: 0;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(300px, 300px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+    <body>
+        <div class="meteor" style="animation-delay: 0s;"></div>
+        <div class="meteor" style="animation-delay: 1s;"></div>
+        <div class="meteor" style="animation-delay: 2s;"></div>
+    </body>
+</html>
