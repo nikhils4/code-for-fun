@@ -1,0 +1,85 @@
+<!--If you find my content helpful and would like to support me, you can buy me a book, -->
+<!--https://www.youtube.com/@IncodeByNikhil-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Following Pointer</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+        }
+
+        .follower-container {
+            width: 300px;
+            height: 200px;
+            background-color: #3b3b3b;
+            position: relative;
+            cursor: none;
+            overflow: hidden;
+        }
+
+        .follower {
+            position: absolute;
+            pointer-events: none;
+            display: none;
+        }
+
+        .pointer {
+            width: 24px;
+            height: 24px;
+            fill: #0ea5e9;
+            transform: rotate(-70deg) translate(-12px, -10px);
+        }
+
+        .tooltip {
+            background-color: #0ea5e9;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 9999px;
+            font-size: 12px;
+            white-space: nowrap;
+            transform: translate(-50%, -100%);
+            margin-top: 20px;
+            margin-left: 60px;
+        }
+    </style>
+</head>
+<body>
+<div class="follower-container" id="followerContainer">
+    <div class="follower" id="follower">
+        <svg class="pointer" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"></path>
+        </svg>
+        <div class="tooltip">Incode by Nikhil</div>
+    </div>
+</div>
+
+<script>
+    const container = document.getElementById('followerContainer');
+    const follower = document.getElementById('follower');
+
+    container.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        follower.style.display = 'block';
+        follower.style.left = `${x}px`;
+        follower.style.top = `${y}px`;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        follower.style.display = 'none';
+    });
+</script>
+</body>
+</html>
