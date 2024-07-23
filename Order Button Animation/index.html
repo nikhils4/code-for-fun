@@ -1,0 +1,226 @@
+<!--If you find my content helpful and would like to support me, you can buy me a book, https://www.buymeacoffee.com/nikhils4 -->
+<!--https://www.youtube.com/@IncodeByNikhil-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Button Animation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .order-button {
+            font-size: 18px;
+            font-weight: 600;
+            padding: 15px 30px;
+            background-color: #00f2fe;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button:hover {
+            background-color: #00d2fe;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .delivery-scene {
+            margin-top: 30px;
+            position: relative;
+            width: 300px;
+            height: 150px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            overflow: hidden;
+            display: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .road {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #333;
+        }
+
+        .truck {
+            position: absolute;
+            bottom: 30px;
+            left: -120px;
+            width: 120px;
+            height: 70px;
+            transition: left 5s ease-in-out;
+        }
+
+        .truck-body {
+            position: absolute;
+            bottom: 0;
+            width: 80px;
+            height: 60px;
+            background-color: #4a69bd;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .truck-cabin {
+            position: absolute;
+            bottom: 0;
+            left: 80px;
+            width: 40px;
+            height: 45px;
+            background-color: #4a69bd;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .truck-window {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 25px;
+            height: 20px;
+            background-color: #82ccdd;
+            border-radius: 3px;
+        }
+
+        .truck-wheel {
+            position: absolute;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: #2c3e50;
+            border-radius: 50%;
+            border: 3px solid #95a5a6;
+        }
+
+        .truck-wheel.front {
+            right: 10px;
+        }
+
+        .truck-wheel.back {
+            left: 10px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #000;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #fff;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <button class="order-button">Order Now</button>
+    <div class="delivery-scene">
+        <div class="stars"></div>
+        <div class="road"></div>
+        <div class="truck">
+            <div class="truck-body"></div>
+            <div class="truck-cabin">
+                <div class="truck-window"></div>
+            </div>
+            <div class="truck-wheel front"></div>
+            <div class="truck-wheel back"></div>
+        </div>
+    </div>
+    <div class="message">Your order is on its way!</div>
+</div>
+
+<script>
+    const orderButton = document.querySelector('.order-button');
+    const deliveryScene = document.querySelector('.delivery-scene');
+    const truck = document.querySelector('.truck');
+    const message = document.querySelector('.message');
+    const stars = document.querySelector('.stars');
+
+    function createStar() {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        stars.appendChild(star);
+
+        setTimeout(() => {
+            star.style.opacity = '1';
+            star.style.transition = 'all 1s ease-out';
+        }, 10);
+
+        setTimeout(() => {
+            star.remove();
+        }, 5000);
+    }
+
+    function animateStars() {
+        setInterval(createStar, 80);
+    }
+
+    orderButton.addEventListener('click', () => {
+        deliveryScene.style.display = 'block';
+        orderButton.disabled = true;
+        orderButton.style.display = 'none';
+        orderButton.style.backgroundColor = '#cccccc';
+        orderButton.style.cursor = 'default';
+
+        animateStars();
+
+        setTimeout(() => {
+            truck.style.left = 'calc(100% + 120px)';
+            message.style.opacity = '1';
+        }, 100);
+
+        setTimeout(() => {
+            truck.style.transition = 'none';
+            truck.style.left = '-120px';
+            setTimeout(() => {
+                truck.style.transition = 'left 5s ease-in-out';
+            }, 50);
+
+            orderButton.disabled = false;
+            orderButton.style.backgroundColor = '#00f2fe';
+            orderButton.style.cursor = 'pointer';
+
+            message.style.opacity = '0';
+            deliveryScene.style.display = 'none';
+        }, 5000);
+    });
+</script>
+</body>
+</html>
