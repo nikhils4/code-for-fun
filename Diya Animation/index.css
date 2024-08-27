@@ -1,0 +1,123 @@
+body {
+  transition: background-color 0.5s ease, color 0.5s ease;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #111;
+  color: #fff;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  z-index: 1;
+}
+
+.diya {
+  width: 120px;
+  height: 40px;
+  background: linear-gradient(to top, #8b4513, #a0522d);
+  border-radius: 40% 40% 60% 60% / 20% 20% 100% 100%;
+  position: relative;
+  margin: 20px auto;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.flame {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) scaleY(-1);
+  width: 20px;
+  height: 30px;
+  background: radial-gradient(ellipse at bottom, #ffd700, #ff8c00);
+  border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+  opacity: 0;
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.diya.on .flame {
+  opacity: 1;
+  animation: flicker 0.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+.hidden-content {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hidden-content.visible {
+  opacity: 1;
+}
+
+.light-rays {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(ellipse at center,
+      rgba(255, 215, 0, 0.8) 0%,
+      rgba(255, 165, 0, 0) 70%);
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.diya.on .light-rays {
+  opacity: 1;
+  animation: ray-flicker 1s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes ray-flicker {
+  0% {
+    transform: translateX(-50%) rotate(180deg) scale(1);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: translateX(-50%) rotate(180deg) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.light-beam {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle,
+      rgba(255, 215, 0, 0.2) 0%,
+      rgba(255, 165, 0, 0) 70%);
+  opacity: 0;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.light-beam.on {
+  width: 200vmax;
+  height: 200vmax;
+  opacity: 1;
+}

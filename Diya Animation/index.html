@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magical Diya</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="diya">
+        <div class="flame"></div>
+        <div class="light-rays"></div>
+      </div>
+      <div class="hidden-content">
+        <h2>Light Revealed</h2>
+        <p>You've brought light to the shadows!</p>
+      </div>
+    </div>
+    <div class="light-beam"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const diya = document.querySelector(".diya");
+        const hiddenContent = document.querySelector(".hidden-content");
+        const lightBeam = document.querySelector(".light-beam");
+        const body = document.body;
+
+        diya.addEventListener("click", () => {
+          diya.classList.toggle("on");
+          lightBeam.classList.toggle("on");
+          hiddenContent.classList.toggle("visible");
+
+          if (diya.classList.contains("on")) {
+            body.style.backgroundColor = "#f0f0f0";
+            body.style.color = "#333";
+          } else {
+            body.style.backgroundColor = "#111";
+            body.style.color = "#fff";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
