@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  font-family: 'Poppins', sans-serif;
+}
+
+.download-btn {
+  position: relative;
+  padding: 20px 60px;
+  background: linear-gradient(45deg, #00fff5, #0066ff);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 20px rgba(0, 255, 245, 0.3);
+}
+
+.download-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 255, 245, 0.5);
+}
+
+.download-btn .text {
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s ease;
+}
+
+.download-btn .progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 5px;
+  background: linear-gradient(90deg, #ff6b6b, #feca57);
+  transition: width 3s linear;
+}
+
+.download-btn .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.4s ease;
+  font-size: 24px;
+}
+
+.download-btn.animating {
+  animation: buttonPulse 1.5s infinite;
+}
+
+.download-btn.animating .text {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.download-btn.animating .icon {
+  opacity: 1;
+  animation: iconFloat 1.5s infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%);
+  }
+
+  50% {
+    transform: translate(-50%, -70%);
+  }
+}

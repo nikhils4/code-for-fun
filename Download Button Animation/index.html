@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Download Button Animation</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <button class="download-btn">
+      <span class="text">Download Now</span>
+      <span class="icon">📥</span>
+      <div class="progress"></div>
+    </button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const downloadBtn = document.querySelector(".download-btn");
+        const progressBar = downloadBtn.querySelector(".progress");
+
+        downloadBtn.addEventListener("click", () => {
+          if (!downloadBtn.classList.contains("animating")) {
+            downloadBtn.classList.add("animating");
+            progressBar.style.width = "100%";
+
+            setTimeout(() => {
+              downloadBtn.classList.remove("animating");
+              progressBar.style.width = "0%";
+            }, 3000);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
