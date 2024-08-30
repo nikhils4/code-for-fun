@@ -1,0 +1,170 @@
+body {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  overflow: hidden;
+}
+
+.loader-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite,
+    colorChange 5s linear infinite;
+  transition: all 0.5s ease;
+}
+
+.loader:nth-child(2) {
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  animation-duration: 1.5s, 5s;
+  animation-direction: reverse, normal;
+}
+
+.loader:nth-child(3) {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  animation-duration: 2s, 5s;
+}
+
+.cool-effect {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  top: 37%;
+  left: 37%;
+  background: linear-gradient(45deg, #ff00ff, #00ffff);
+  border-radius: 50%;
+  animation: morph 3s ease-in-out infinite, rotate 5s linear infinite;
+  transition: all 0.5s ease;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.loader-container:hover {
+  transform: scale(1.1);
+}
+
+.loader-container:active {
+  transform: scale(0.9);
+}
+
+.loader-container.exploded .loader {
+  transform: scale(1.5);
+  opacity: 0;
+}
+
+.loader-container.exploded .cool-effect {
+  transform: scale(5);
+  opacity: 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes morph {
+
+  0%,
+  100% {
+    border-radius: 50%;
+  }
+
+  50% {
+    border-radius: 20% 80% 30% 70% / 70% 30% 80% 20%;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    border-top-color: #ff0000;
+  }
+
+  16.66% {
+    border-top-color: #ff9500;
+  }
+
+  33.33% {
+    border-top-color: #ffff00;
+  }
+
+  50% {
+    border-top-color: #00ff00;
+  }
+
+  66.66% {
+    border-top-color: #0000ff;
+  }
+
+  83.33% {
+    border-top-color: #9900ff;
+  }
+
+  100% {
+    border-top-color: #ff0000;
+  }
+}
+
+.text {
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 2px;
+  animation: fadeInOut 2s ease-in-out infinite;
+  transition: all 0.5s ease;
+}
+
+.loader-container.exploded .text {
+  transform: translate(-50%, -50%) scale(2);
+  bottom: 50%;
+  opacity: 1;
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
