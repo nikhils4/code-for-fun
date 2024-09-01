@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stylish Login Form</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <canvas class="cyberpunk-bg"></canvas>
+    <div class="floating-cubes"></div>
+    <div class="login-container">
+      <h2>Cyberpunk Login</h2>
+      <form>
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="button">
+          <span>Access System</span>
+        </button>
+      </form>
+    </div>
+    <div class="particles"></div>
+
+    <script>
+      const button = document.querySelector(".button");
+      const particlesContainer = document.querySelector(".particles");
+
+      button.addEventListener("click", explodeParticles);
+
+      function explodeParticles(e) {
+        e.preventDefault();
+        particlesContainer.innerHTML = "";
+        for (let i = 0; i < 100; i++) {
+          createParticle();
+        }
+        button.style.animation = "glitch 0.3s infinite";
+        setTimeout(() => {
+          button.style.animation = "";
+        }, 1000);
+      }
+
+      function createParticle() {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        const size = Math.random() * 5 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        const buttonRect = button.getBoundingClientRect();
+        const startX = buttonRect.left + buttonRect.width / 2;
+        const startY = buttonRect.top + buttonRect.height / 2;
+        particle.style.left = `${startX}px`;
+        particle.style.top = `${startY}px`;
+        particlesContainer.appendChild(particle);
+        animateParticle(particle, startX, startY);
+      }
+
+      function animateParticle(particle, startX, startY) {
+        const angle = Math.random() * Math.PI * 2;
+        const velocity = Math.random() * 200 + 100;
+        const endX = startX + Math.cos(angle) * velocity;
+        const endY = startY + Math.sin(angle) * velocity;
+        const animation = particle.animate(
+          [
+            { transform: "translate(0, 0) scale(1)", opacity: 1 },
+            {
+              transform: `translate(${endX - startX}px, ${
+                endY - startY
+              }px) scale(0)`,
+              opacity: 0,
+            },
+          ],
+          {
+            duration: Math.random() * 1000 + 500,
+            easing: "cubic-bezier(0.4, 0.0, 0.2, 1)",
+          }
+        );
+        animation.onfinish = () => {
+          particle.remove();
+        };
+      }
+
+      const inputs = document.querySelectorAll("input");
+      inputs.forEach((input) => {
+        input.addEventListener("focus", () => {
+          input.style.animation = "glitch 0.2s infinite";
+        });
+        input.addEventListener("blur", () => {
+          input.style.animation = "";
+        });
+      });
+
+      const canvas = document.querySelector(".cyberpunk-bg");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      function drawGrid() {
+        ctx.strokeStyle = "rgba(0, 255, 255, 0.1)";
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 20) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, canvas.height);
+          ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 20) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(canvas.width, y);
+          ctx.stroke();
+        }
+      }
+
+      let time = 0;
+      function drawCircuit() {
+        ctx.strokeStyle = "rgba(0, 255, 255, 0.2)";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(
+          0,
+          (Math.sin(time * 0.02) * canvas.height) / 2 + canvas.height / 2
+        );
+        for (let x = 0; x < canvas.width; x += 50) {
+          ctx.lineTo(
+            x,
+            (Math.sin((time + x) * 0.02) * canvas.height) / 2 +
+              canvas.height / 2
+          );
+        }
+        ctx.stroke();
+        time += 0.5;
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawGrid();
+        drawCircuit();
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+
+      const floatingCubes = document.querySelector(".floating-cubes");
+      for (let i = 0; i < 20; i++) {
+        const cube = document.createElement("div");
+        cube.classList.add("cube");
+        cube.style.left = `${Math.random() * 100}%`;
+        cube.style.top = `${Math.random() * 100}%`;
+        cube.style.animationDelay = `${Math.random() * 10}s`;
+        floatingCubes.appendChild(cube);
+      }
+    </script>
+  </body>
+</html>
