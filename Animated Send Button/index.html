@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Send Button</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <button id="sendButton" class="send-button" onclick="sendMessage()">
+      Send <i id="sendIcon" class="fas fa-paper-plane send-icon"></i>
+    </button>
+
+    <script>
+      function sendMessage() {
+        const button = document.getElementById("sendButton");
+        const icon = document.getElementById("sendIcon");
+
+        icon.classList.add("flying");
+
+        setTimeout(() => {
+          button.classList.add("sent");
+          button.textContent = "Sent";
+        }, 500);
+      }
+    </script>
+  </body>
+</html>

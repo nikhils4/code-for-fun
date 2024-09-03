@@ -1,0 +1,81 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a1a1a;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.send-button {
+  position: relative;
+  width: 200px;
+  height: 60px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  overflow: visible;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.send-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1),
+    0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.send-button.sent {
+  width: 100px;
+  background-color: #2ecc71;
+}
+
+.send-icon {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.send-icon.flying {
+  animation: fly 6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes fly {
+  0% {
+    transform: translate(0, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  15%,
+  35%,
+  55%,
+  75%,
+  95% {
+    transform: translate(100px, -100px) scale(1.2) rotate(15deg);
+  }
+
+  25%,
+  45%,
+  65%,
+  85% {
+    transform: translate(200px, -150px) scale(1.4) rotate(30deg);
+  }
+
+  50% {
+    transform: translate(300px, -200px) scale(1.6) rotate(45deg);
+  }
+
+  100% {
+    transform: translate(600px, -300px) scale(2) rotate(60deg);
+    opacity: 0;
+  }
+}
