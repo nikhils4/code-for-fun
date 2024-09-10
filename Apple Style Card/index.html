@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple Style Card</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="card" id="card">
+      <div class="card-background" id="cardBackground"></div>
+      <div class="card-content">
+        <h2 class="card-title">Beautiful Landscape</h2>
+        <p>Explore nature's wonders</p>
+      </div>
+      <div class="card-description">
+        <h3 class="description-title">About this Landscape</h3>
+        <p>
+          This breathtaking view showcases the raw beauty of nature. Rolling
+          hills, lush forests, and a serene lake combine to create a picturesque
+          scene that captivates the soul and inspires the mind.
+        </p>
+      </div>
+      <button class="toggle-btn" id="toggleBtn">+</button>
+    </div>
+
+    <script>
+      const card = document.getElementById("card");
+      const toggleBtn = document.getElementById("toggleBtn");
+      const cardDescription = document.querySelector(".card-description");
+      const cardBackground = document.getElementById("cardBackground");
+      const cardContent = document.querySelector(".card-content");
+
+      let isExpanded = false;
+
+      toggleBtn.addEventListener("click", () => {
+        isExpanded = !isExpanded;
+
+        if (isExpanded) {
+          cardDescription.style.transform = "translateY(0)";
+          toggleBtn.style.transform = "rotate(45deg)";
+          cardBackground.style.transform = "translateY(-100%)";
+          cardContent.style.transform = "translateY(-100%)";
+        } else {
+          cardDescription.style.transform = "translateY(100%)";
+          toggleBtn.style.transform = "rotate(0deg)";
+          cardBackground.style.transform = "translateY(0)";
+          cardContent.style.transform = "translateY(0)";
+        }
+      });
+
+      const imageUrl = "https://picsum.photos/300/400?landscape";
+      card.style.backgroundImage = `url('${imageUrl}')`;
+      cardBackground.style.backgroundImage = `url('${imageUrl}')`;
+    </script>
+  </body>
+</html>
