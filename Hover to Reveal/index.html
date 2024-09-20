@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hover to Reveal</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="text-reveal" id="textReveal">
+      <span>Y</span><span>o</span><span>u</span>
+      <span> </span>
+      <span>a</span><span>r</span><span>e</span>
+      <span> </span>
+      <span>a</span><span>w</span><span>e</span><span>s</span><span>o</span
+      ><span>m</span><span>e</span><span>!</span>
+      <span> </span>
+      <span>S</span><span>h</span><span>i</span><span>n</span><span>e</span>
+      <span> </span>
+      <span>o</span><span>n</span><span>!</span>
+    </div>
+    <div class="spotlight" id="spotlight"></div>
+    <div class="instruction">Move your cursor to reveal the hidden text</div>
+
+    <script>
+      const textReveal = document.getElementById("textReveal");
+      const spotlight = document.getElementById("spotlight");
+      const letters = textReveal.querySelectorAll("span");
+
+      document.addEventListener("mousemove", (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+
+        spotlight.style.left = `${x}px`;
+        spotlight.style.top = `${y}px`;
+
+        letters.forEach((letter) => {
+          const letterRect = letter.getBoundingClientRect();
+          const letterX = letterRect.left + letterRect.width / 2;
+          const letterY = letterRect.top + letterRect.height / 2;
+
+          const distance = Math.sqrt(
+            Math.pow(x - letterX, 2) + Math.pow(y - letterY, 2)
+          );
+          const maxDistance = 75;
+
+          if (distance < maxDistance) {
+            const opacity = 1 - distance / maxDistance;
+            letter.style.color = `rgba(255, 255, 255, ${opacity})`;
+          } else {
+            letter.style.color = "transparent";
+          }
+        });
+      });
+
+      document.addEventListener("mouseleave", () => {
+        letters.forEach((letter) => {
+          letter.style.color = "transparent";
+        });
+      });
+
+      textReveal.addEventListener("mousedown", (e) => e.preventDefault());
+    </script>
+  </body>
+</html>
